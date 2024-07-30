@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node --watch src/index.js"
+    "dev": "node --experimental-json-modules --watch src/index.js"
   },
   "keywords": [],
   "author": "ngarcia-dev",
@@ -13,5 +13,8 @@
   "dependencies": {
     "express": "^4.19.2",
     "twilio": "^5.2.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
   }
 }
