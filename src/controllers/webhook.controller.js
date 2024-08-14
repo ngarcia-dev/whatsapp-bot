@@ -1,17 +1,20 @@
 import twilio from "twilio";
-process.loadEnvFile();
 
-export const client = twilio(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-);
+const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, MESSAGING_SERVICE_SID } =
+  process.env;
+
+export const client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 
 export const webhook = async (req, res) => {
+  const { ProfileName, From, Body } = req.body;
   const twiml = new twilio.twiml.MessagingResponse();
-  const message = req.body.Body;
 
-  if (message === "Hola") {
-    twiml.message(`Hola ${req.body.ProfileName}, ¿cómo puedo ayudarte?`);
+  if (Body === "Hola") {
+    await client.messages.create({
+      contentSid: "HX310cec6816b9031e8dbdbc20dc78e766",
+      messagingServiceSid: MESSAGING_SERVICE_SID,
+      to: From,
+    });
   }
 
   console.log(req.body);
