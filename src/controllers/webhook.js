@@ -16,7 +16,7 @@ const {
   im_study_id,
   info_cbc_id,
   study_ffyb_id
-} = welcome.weolcome_item_ids;
+} = welcome.welcome_item_ids;
 
 const {
   becas,

@@ -2,7 +2,7 @@
   "content_template": {
     "welcome": {
       "_sid": "HX4cc87a91736e70e51f96b83575b968fb",
-      "weolcome_item_ids": {
+      "welcome_item_ids": {
         "im_study_id": "soyalumno",
         "info_cbc_id": "infocbc",
         "study_ffyb_id": "estudiarffyb"
