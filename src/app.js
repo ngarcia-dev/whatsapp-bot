@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 
-import webhookRouter from "./routes/webhook.routes.js";
+import webhookRouter from "./routes/webhook.js";
 
 const app = express();
 

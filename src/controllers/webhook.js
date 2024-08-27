@@ -1,6 +1,6 @@
 import twilio from "twilio";
-import { sendMessage } from "../services/messageService.js";
-import universityData from "../../templates_ffyb.json" with { type: "json" };
+import { sendMessage } from "../services/message.js";
+import templates from "../../templates_ffyb.json" with { type: "json" };
 
 const {
   welcome,
@@ -10,7 +10,7 @@ const {
   plan_estudio,
   video_farm,
   que_hace_un,
-} = universityData.content_template;
+} = templates.content_template;
 
 const {
   im_study_id,
