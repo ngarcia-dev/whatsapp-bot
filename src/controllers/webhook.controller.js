@@ -1,4 +1,5 @@
 import twilio from "twilio";
+import { sendMessage } from "../services/messageService.js";
 import universityData from "../../templates_ffyb.json" with { type: "json" };
 
 const {
@@ -35,36 +36,18 @@ const {
   tugib
 } = carreras.carreras_item_ids;
 
-const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, MESSAGING_SERVICE_SID } =
-  process.env;
-
-export const client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
-
 export const webhook = async (req, res) => {
   const { ProfileName, From, Body: message } = req.body;
   const twiml = new twilio.twiml.MessagingResponse();
 
-  // Función auxiliar para enviar mensajes
-  const sendMessage = async (contentSid, contentVariables = null) => {
-    const options = {
-      contentSid,
-      messagingServiceSid: MESSAGING_SERVICE_SID,
-      to: From
-    }
-
-    contentVariables ? options.contentVariables = JSON.stringify(contentVariables) : null;
-
-    await client.messages.create(options);
-  }
-
   // Lógica para manejar diferentes mensajes
   switch (message) {
     case "Hola":
-      await sendMessage(welcome._sid, { 1: ProfileName });
+      await sendMessage(From, welcome._sid, { 1: ProfileName });
       break;
 
     case im_study_id:
-      await sendMessage(info_alumnos._sid);
+      await sendMessage(From, info_alumnos._sid);
       break;
 
     // Resto de casos
