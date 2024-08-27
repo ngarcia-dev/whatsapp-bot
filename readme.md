@@ -1,4 +1,4 @@
-## WHATSAPP-BOT-APP
+## WHATSAPP-BOT
 
 #### Para ejecutar el proyecto se necesita tener instalado nodejs en el sistema.
 
