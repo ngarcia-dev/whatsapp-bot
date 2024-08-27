@@ -44,21 +44,34 @@ export const webhook = async (req, res) => {
   const { ProfileName, From, Body: message } = req.body;
   const twiml = new twilio.twiml.MessagingResponse();
 
-  if (message === "Hola") {
-    await client.messages.create({
-      contentSid: welcome._sid,
-      contentVariables: JSON.stringify({ 1: ProfileName }),
+  // Función auxiliar para enviar mensajes
+  const sendMessage = async (contentSid, contentVariables = null) => {
+    const options = {
+      contentSid,
       messagingServiceSid: MESSAGING_SERVICE_SID,
-      to: From,
-    });
+      to: From
+    }
+
+    contentVariables ? options.contentVariables = JSON.stringify(contentVariables) : null;
+
+    await client.messages.create(options);
   }
 
-  if (message === im_study_id) {
-    await client.messages.create({
-      contentSid: info_alumnos._sid,
-      messagingServiceSid: MESSAGING_SERVICE_SID,
-      to: From,
-    });
+  // Lógica para manejar diferentes mensajes
+  switch (message) {
+    case "Hola":
+      await sendMessage(welcome._sid, { 1: ProfileName });
+      break;
+
+    case im_study_id:
+      await sendMessage(info_alumnos._sid);
+      break;
+
+    // Resto de casos
+
+    default:
+      console.log("Mensaje no reconocido:", message);
+      break;
   }
 
   console.log(req.body);
