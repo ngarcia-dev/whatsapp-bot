@@ -18,7 +18,7 @@ export const webhook = async (req, res) => {
 
     if (contentSid) await sendMessage(From, contentSid);
 
-    console.log(req.body);
+    //console.log(req.body);
 
     res.writeHead(200, { "Content-Type": "text/xml" });
     res.end(twiml.toString());
